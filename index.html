@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Animador 2D</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Barra superior -->
+        <div class="top-bar">
+            <div class="file-menu">
+                <button class="menu-btn">
+                    <i class="fas fa-file"></i> Arquivo
+                </button>
+                <button class="menu-btn">
+                    <i class="fas fa-edit"></i> Editar
+                </button>
+            </div>
+            <div class="view-controls">
+                <button title="Zoom In"><i class="fas fa-search-plus"></i></button>
+                <span class="zoom-level">100%</span>
+                <button title="Zoom Out"><i class="fas fa-search-minus"></i></button>
+            </div>
+        </div>
+
+        <!-- Container principal -->
+        <div class="main-container">
+            <!-- Barra de ferramentas esquerda -->
+            <div class="left-toolbar">
+                <div class="tool-group">
+                    <button class="tool-btn active" data-tool="brush" title="Pincel (B)">
+                        <i class="fas fa-paint-brush"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="eraser" title="Borracha (E)">
+                        <i class="fas fa-eraser"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="fill" title="Preenchimento (G)">
+                        <i class="fas fa-fill-drip"></i>
+                    </button>
+                    <button class="tool-btn" data-tool="move" title="Mover (V)">
+                        <i class="fas fa-arrows-alt"></i>
+                    </button>
+                </div>
+
+                <div class="color-section">
+                    <div class="color-preview">
+                        <div class="current-color"></div>
+                        <div class="secondary-color"></div>
+                    </div>
+                    <input type="color" id="colorPicker" value="#000000">
+                    <div class="color-palette">
+                        <button style="background: #000000"></button>
+                        <button style="background: #ffffff"></button>
+                        <button style="background: #ff0000"></button>
+                        <button style="background: #00ff00"></button>
+                        <button style="background: #0000ff"></button>
+                        <button style="background: #ffff00"></button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Área de trabalho central -->
+            <div class="workspace">
+                <div class="canvas-container">
+                    <canvas id="canvas" width="800" height="600"></canvas>
+                    <canvas id="onionCanvas" width="800" height="600"></canvas>
+                </div>
+            </div>
+
+            <!-- Painel direito -->
+            <div class="right-panel">
+                <!-- Sub-tools -->
+                <div class="sub-tools">
+                    <div class="tool-settings">
+                        <h3>Configurações da Ferramenta</h3>
+                        <div class="brush-settings">
+                            <label>Tamanho</label>
+                            <input type="range" id="brushSize" min="1" max="100" value="5">
+                            <span id="brushSizeValue">5px</span>
+                        </div>
+                        <div class="brush-opacity">
+                            <label>Opacidade</label>
+                            <input type="range" id="brushOpacity" min="0" max="100" value="100">
+                            <span>100%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Camadas -->
+                <div class="layers-panel">
+                    <div class="panel-header">
+                        <h3>Camadas</h3>
+                        <div class="layer-controls">
+                            <button id="addLayer" title="Nova Camada">
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button id="deleteLayer" title="Excluir Camada">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="layersList" class="layers-list"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline -->
+        <div class="timeline">
+            <div class="timeline-header">
+                <div class="timeline-controls">
+                    <button id="firstFrame" title="Primeiro Frame">
+                        <i class="fas fa-step-backward"></i>
+                    </button>
+                    <button id="prevFrame" title="Frame Anterior">
+                        <i class="fas fa-caret-left"></i>
+                    </button>
+                    <button id="playButton" title="Play/Pause">
+                        <i class="fas fa-play"></i>
+                    </button>
+                    <button id="nextFrame" title="Próximo Frame">
+                        <i class="fas fa-caret-right"></i>
+                    </button>
+                    <button id="lastFrame" title="Último Frame">
+                        <i class="fas fa-step-forward"></i>
+                    </button>
+                    <div class="fps-control">
+                        <input type="number" id="fpsControl" value="12" min="1" max="60">
+                        <span>FPS</span>
+                    </div>
+                </div>
+                <div class="onion-skin-controls">
+                    <label class="toggle">
+                        <input type="checkbox" id="onionSkinToggle">
+                        <span>Onion Skin</span>
+                    </label>
+                    <input type="range" id="onionSkinOpacity" min="0" max="100" value="30">
+                </div>
+                <button id="addFrame" class="add-frame-btn" title="Novo Frame">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="frames-container" id="framesContainer"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/main.js"></script>
+    <script src="js/tools/brush.js"></script>
+    <script src="js/tools/eraser.js"></script>
+    <script src="js/tools/fill.js"></script>
+    <script src="js/ui/timeline.js"></script>
+    <script src="js/ui/layers.js"></script>
+</body>
+</html>
